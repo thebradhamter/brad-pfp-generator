@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            text-align: center;
+        }
+    </style>
+    <title>brad pfp generator</title>
+</head>
+<body>
+    <h1>brad pfp generator</h1>
+    <p><a href="https://thebradhamter.github.io">Back to home</a></p>
+    <img src="./img/brads/yellow.png" alt="brad" id="bradImg">
+    <br>
+    <label for="bradColours">Choose a colour:</label>
+    <select name="bradColours" id="bradColours">
+        <option value="red">Red</option>
+        <option value="orange">Orange</option>
+        <option value="yellow" selected id="bradColoursYellow">Yellow</option>
+        <option value="green">Green</option>
+        <option value="teal">Teal</option>
+        <option value="skyblue">Sky Blue</option>
+        <option value="blue">Blue</option>
+        <option value="purple">Purple</option>
+        <option value="pink">Pink</option>
+        <option value="blank"></option>
+        <option value="custom">Custom</option>
+    </select>
+    <div id="customHueDiv" hidden>
+        <label for="hueSlider" id="hueText"></label>
+        <input type="range" name="hueSlider" id="hueSlider" min="0" max="360">
+    </div>
+    <br>
+    <button id="downloadBtn">Download</button>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <script>
+        const bradImg = document.getElementById("bradImg");
+        const bradColours = document.getElementById("bradColours");
+        const bradColoursYellow = document.getElementById("bradColoursYellow");
+        const customHueDiv = document.getElementById("customHueDiv");
+        const hueText = document.getElementById("hueText");
+        const hueSlider = document.getElementById("hueSlider");
+        const downloadBtn = document.getElementById("downloadBtn");
+
+        function update() {
+            // Update image src unless custom is selected
+            if (bradColours.value !== "custom") {
+                bradImg.src = `./img/brads/${bradColours.value}.png`;
+                bradImg.style.filter = ""; // remove hue if not custom
+            } else {
+                bradImg.src = "./img/brads/yellow.png";
+                bradImg.style.filter = `hue-rotate(${hueSlider.value}deg)`;
+            }
+            hueText.innerHTML = `Custom hue (${hueSlider.value}°):`;
+        }
+
+        bradColours.addEventListener("change", function () {
+            customHueDiv.hidden = true;
+            if (this.value === "blank") {
+                bradColoursYellow.selected = true;
+                update();
+            } else if (this.value === "custom") {
+                customHueDiv.hidden = false;
+                update(); // Ensure hue filter is applied when switching
+            } else {
+                update();
+            }
+        });
+
+        hueSlider.addEventListener("input", function () { // use input for live update
+            hueText.innerHTML = `Custom hue (${this.value}°):`;
+            bradImg.style.filter = `hue-rotate(${this.value}deg)`;
+        });
+
+        downloadBtn.addEventListener("click", function () {
+            const img = new Image();
+            img.crossOrigin = "anonymous";      // important if hosted externally
+            img.src = bradImg.src;
+
+            img.onload = function () {
+                const c = document.createElement("canvas");
+                c.width = img.width;
+                c.height = img.height;
+                const ctx = c.getContext("2d");
+                ctx.filter = `hue-rotate(${hueSlider.value}deg)`; // apply same filter
+                ctx.drawImage(img, 0, 0);
+                const link = document.createElement("a");
+                link.href = c.toDataURL("image/png");
+                link.download = "brad.png";
+                link.click();
+            };
+        });
+
+        update();
+    </script>
+</body>
+</html>
