@@ -11,18 +11,13 @@ const downloadBtn = document.getElementById("downloadBtn");
 
 function update() {
     customHueDiv.hidden = true;
-    if (bradColours.value === "blank") {
-        bradColoursYellow.selected = true;
-    } else if (bradColours.value === "custom") {
+    if (bradColours.value === "custom") {
         customHueDiv.hidden = false;
         bradImg.src = "./img/brads/yellow.png";
         bradImg.style.filter = `hue-rotate(${hueSlider.value}deg)`;
     } else {
         bradImg.src = `./img/brads/${bradColours.value}.png`;
         bradImg.style.filter = "";
-    }
-    if (bradOverlays.value === "blank") {
-        bradOverlaysNone.selected = true;
     }
     bradOverlay.src = `./img/overlays/${bradOverlays.value}.png`;
     hueText.innerHTML = `Custom hue (${hueSlider.value}°):`;

@@ -8,34 +8,55 @@
 </head>
 <body>
     <h1>brad pfp generator</h1>
-    <p><a href="https://thebradhamter.github.io">Back to home</a></p>
+    <p>Preview:</p>
     <div style="position: relative; display: inline-block;">
         <img src="./img/brads/yellow.png" alt="brad" id="bradImg">
         <img src="" alt="overlay" id="bradOverlay" style="position:absolute; top:0; left:0;">
+        <div id="customBg"></div>
     </div>
     <br>
     <label for="bradColours">Choose a colour:</label>
     <select name="bradColours" id="bradColours">
-        <option value="red">Red</option>
-        <option value="orange">Orange</option>
-        <option value="yellow" selected id="bradColoursYellow">Yellow</option>
-        <option value="green">Green</option>
-        <option value="teal">Teal</option>
-        <option value="skyblue">Sky Blue</option>
-        <option value="blue">Blue</option>
-        <option value="purple">Purple</option>
-        <option value="pink">Pink</option>
-        <option value="blank"></option>
+        <optgroup label="Main">
+            <option value="red">Red</option>
+            <option value="orange">Orange</option>
+            <option value="yellow" selected id="bradColoursYellow">Yellow</option>
+            <option value="green">Green</option>
+            <option value="blue">Blue</option>
+            <option value="purple">Purple</option>
+            <option value="pink">Pink</option>
+        </optgroup>
+        <optgroup label="Other">
+            <option value="teal">Teal</option>
+            <option value="skyblue">Sky Blue</option>
+        </optgroup>
         <option value="custom">Custom</option>
     </select>
     <label for="bradOverlays">Choose an overlay:</label>
     <select name="bradOverlays" id="bradOverlays">
-        <option value="none" selected id="bradOverlaysNone">None</option>
-        <option value="blank"></option>
-        <option value="pumpkin">Pumpkin</option>
-        <option value="shades">Shades</option>
-        <option value="gamershades">Gamer shades</option>
-        <option value="fancyhat">Fancy hat</option>
+        <option value="none" selected>None</option>
+        <optgroup label="Hats">
+            <option value="fancyhat">Fancy hat</option>
+            <option value="pumpkin">Pumpkin</option>
+            <option value="santahat">Santa hat</option>
+        </optgroup>
+        <optgroup label="Glasses">
+            <option value="gamershades">Gamer shades</option>
+            <option value="nerdglasses">Nerd glasses</option>
+            <option value="shades">Shades</option>
+        </optgroup>
+        <optgroup label="Facial hair">
+            <option value="beard">Beard</option>
+            <option value="beardandmoustache">Beard and moustache</option>
+            <option value="moustache">Moustache</option>
+        </optgroup>
+        <optgroup label="Weapons">
+            <option value="gun">Gun</option>
+            <option value="knife">Knife</option>
+        </optgroup>
+        <optgroup label="Misc">
+            <option value="googlyeyes">Googly eyes</option>
+        </optgroup>
     </select>
     <div id="customHueDiv" hidden>
         <label for="hueSlider" id="hueText"></label>
@@ -43,6 +64,7 @@
     </div>
     <br>
     <button id="downloadBtn">Download</button>
+    <p>v1.1 | <a href="https://bradhamter.duckdns.org" target="_blank" rel="noopener noreferrer">bradhamter</a> | <a href="https://discord.gg/2gnsHXCdgp" target="_blank" rel="noopener noreferrer">discord</a></p>
     <script src="./app.js"></script>
 </body>
 </html>
